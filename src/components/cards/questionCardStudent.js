@@ -92,6 +92,7 @@ function QuestionCardStudent({ question, index, options }) {
           icon: 'success',
           text: response.data.message,
           confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#519581FF',
         });
         setTimeout(() => {
           Swal.close();
@@ -110,6 +111,7 @@ function QuestionCardStudent({ question, index, options }) {
         title: 'Error',
         text: 'Por favor, selecciona una respuesta antes de enviar.',
         confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#519581FF',
       });
       setTimeout(() => {
         Swal.close();

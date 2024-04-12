@@ -52,7 +52,7 @@ function ButtonCloseSession({ user }) {
       title: '¿Estás Seguro de Cerrar Sesión?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#519581FF',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Si, estoy seguro',
