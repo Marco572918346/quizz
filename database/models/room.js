@@ -15,10 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         as: 'UserRomm',
         foreignKey:'userId'
       })
-      models.Room.hasMany(models.Result, {
-        as: 'RoomResult',
-        foreignKey:'roomId'
-      })
       models.Room.hasMany(models.Bank, {
         as: 'RoomBank',
         foreignKey:'roomId'

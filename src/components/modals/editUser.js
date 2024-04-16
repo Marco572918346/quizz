@@ -144,7 +144,7 @@ function EditUser({ isOpen, closeModal, onUpdate, user }) {
                     required: "Este campo es obligatorio",
                   })}
                 >
-                  <MenuItem value="administrador">administrador</MenuItem>
+                  <MenuItem value="admin">admin</MenuItem>
                   <MenuItem value="maestro">maestro</MenuItem>
                   <MenuItem value="usuario">usuario</MenuItem>
                 </Select>

@@ -7,10 +7,10 @@ const useNavigation = () => {
   const { data: session } = useSession();
 
   const handleUsersClick = () => {
-    if (session?.user?.rol === 'administrador') {
+    if (session?.user?.rol === 'admin') {
       router.push('/users');
     } else {
-      // Acceso denegado para roles diferentes a 'administrador'
+      // Acceso denegado para roles diferentes a 'admin'
       console.log('Acceso denegado a /users para el rol:', session?.user?.rol);
       // Puedes redirigir a una página de acceso denegado o realizar otras acciones según tus necesidades.
     }
@@ -42,15 +42,27 @@ const useNavigation = () => {
     router.push(destination);
   };
 
+  const handleLotteryValidateClick = () => {
+    router.push('/lotteryValidate');
+  };
+
+  const handleLotteryCreateClick = (user) => {
+    console.log('Navigating to lottery create with userId:', user);
+    const destination = `/lottery/create?userId=${ session?.user?.id}`;
+    console.log('Destination:', destination);
+    router.push(destination);
+  };
+
   return {
     handleUsersClick,
     handleCoursesClick,
     handleQuizzesClick,
-    // handleQuestionsClick,
+    handleLotteryValidateClick,
     
     navigateToBankCreation,
     navigateToQuestionsCreation,
     navigateToQuestionsResults,
+    handleLotteryCreateClick
 
   };
 };

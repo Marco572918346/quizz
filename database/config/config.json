@@ -2,7 +2,7 @@
   "development": {
     "username": "admin",
     "password": "n1z4pH3c",
-    "database": "ceeci-bank-v2",
+    "database": "ceeci-bank",
     "host": "mysql-160592-0.cloudclusters.net",
     "port": "16843",
     "dialect": "mysql"
@@ -10,7 +10,7 @@
   "test": {
     "username": "admin",
     "password": "n1z4pH3c",
-    "database": "ceeci-bank-v2",
+    "database": "ceeci-bank",
     "host": "mysql-160592-0.cloudclusters.net",
     "port": "16843",
     "dialect": "mysql"
@@ -18,7 +18,7 @@
   "production": {
     "username": "admin",
     "password": "n1z4pH3c",
-    "database": "ceeci-bank-v2",
+    "database": "ceeci-bank",
     "host": "mysql-160592-0.cloudclusters.net",
     "port": "16843",
     "dialect": "mysql"

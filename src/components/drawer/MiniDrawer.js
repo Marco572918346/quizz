@@ -102,6 +102,7 @@ export default function MiniDrawer({children}) {
     handleUsersClick, 
     handleCoursesClick, 
     handleQuizzesClick,
+    handleLotteryValidateClick
   } = useNavigation();
 
   const handleDrawerOpen = () => {
@@ -150,31 +151,60 @@ export default function MiniDrawer({children}) {
         <Divider />
         <List>
           {session?.user?.rol === 'usuario' || session?.user?.rol === 'maestro' ? (
-            <ListItem key="Salas" disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                  padding: 3,
-                }}
-                onClick={handleCoursesClick}
-              >
-                <ListItemIcon
+            <>
+              <ListItem key="Salas" disablePadding sx={{ display: "block" }}>
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 4 : "auto",
-                    justifyContent: "center",
-                    color: '#223354'
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                    padding: 3,
                   }}
+                  onClick={handleCoursesClick}
                 >
-                  <Tooltip title="Salas" arrow>
-                    <ClassIcon />
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText primary="Salas" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 4 : "auto",
+                      justifyContent: "center",
+                      color: '#223354'
+                    }}
+                  >
+                    <Tooltip title="Salas" arrow>
+                      <ClassIcon />
+                    </Tooltip>
+                  </ListItemIcon>
+                  <ListItemText primary="Salas" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+              {session?.user?.rol === 'usuario' && (
+                <ListItem key="Lotería" disablePadding sx={{ display: "block" }}>
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                      padding: 3,
+                    }}
+                    onClick={handleLotteryValidateClick}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 4 : "auto",
+                        justifyContent: "center",
+                        color: '#223354'
+                      }}
+                    >
+                      <Tooltip title="Lotería" arrow>
+                        <ArticleIcon />
+                      </Tooltip>
+                    </ListItemIcon>
+                    <ListItemText primary="Lotería" sx={{ opacity: open ? 1 : 0 }} />
+                  </ListItemButton>
+                </ListItem>
+              )}
+            </>
           ) : (
             ["Usuarios", "Salas"].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>

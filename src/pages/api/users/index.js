@@ -19,33 +19,30 @@ export default function handler(req, res) {
 }
 
 // GET: usuarios
+// GET: usuarios
 const listUsers = async (req, res) => {
   try {
     const { name } = req.query;
     const { userId } = req.query;
     const { rol } = req.query;
-    const { questionId } = req.query;
-
     let whereCondition = {}; 
 
     let users = []
 
-  if (userId) {
+    if (userId) {
       users = await db.User.findAll({
-      where: {
+        where: {
           id:userId,
-      },
-      attributes: ['id', 'name', 'lastName', 'email', 'password', 'rol'],
-      include: ['UserAnswer']
+        },
+        attributes: ['id', 'name', 'lastName', 'email', 'password', 'rol']
       });
 
-      //console.log(users);
       if (Object.keys(users).length === 0) {
-          return res.status(404).json({ message: 'Usuario no encontrado' });
-          }
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
 
-          return res.json({ users,message: 'Usuario encontrado' });
-  }else if (name) {
+      return res.json({ users,message: 'Usuario encontrado' });
+    } else if (name) {
       whereCondition = {
         [Op.or]: [{
           name: {
@@ -57,7 +54,6 @@ const listUsers = async (req, res) => {
             [Op.like]: `%${name}%`,
           },
         }],
-        
       };
     } else if (rol) {
       whereCondition = {
@@ -65,14 +61,9 @@ const listUsers = async (req, res) => {
       };
     }
 
-    if (questionId) {
-      whereCondition['$UserAnswer.questionId$'] = { [Op.eq]: questionId };
-    }
-    
-     users = await db.User.findAll({
+    users = await db.User.findAll({
       where: whereCondition,
-      attributes: ['id','name', 'lastName', 'email', 'password', 'rol'],
-      include: ['UserAnswer']
+      attributes: ['id', 'name', 'lastName', 'email', 'password', 'rol']
     });
 
     return res.json(users);
@@ -84,14 +75,12 @@ const listUsers = async (req, res) => {
   }
 };
 
-
-
 //POST: usuarios
 const addUsers = async (req, res) => {
   const datosUsuario = { ...req.body };
   try {
     //validar que venga la contraseña
-    /*if (!req.body.password) {
+    if (!req.body.password) {
       return res.status(400).json({ message: "La contraseña es obligatoria" });
     }
 
@@ -112,7 +101,7 @@ const addUsers = async (req, res) => {
         ],
       });
     }
-    */
+   
    
     //asegurar la contraseña
     //usar bcrypt
@@ -163,30 +152,29 @@ const editUsers = async (req, res) => {
     const { id } = req.query;
     const { password, ...userData } = req.body;
 
-    // if (password && password.length < 8) {
-    //   return res.status(400).json({
-    //     error: true,
-    //     message: "La contraseña debe tener una longitud >= 8 caracteres.",
-    //     field: "password",
-    //   });
-    // }
+    if (password && password.length < 8) {
+      return res.status(400).json({
+        error: true,
+        message: "La contraseña debe tener una longitud >= 8 caracteres.",
+         field: "password",
+       });
+    }
 
     // // Validar si se proporciona una nueva contraseña y cifrarla
-    // if (password) {
-    //   const salt = await bcrypt.genSalt(10);
-    //   userData.password = await bcrypt.hash(password, salt);
-    // }
+     if (password) {
+       const salt = await bcrypt.genSalt(10);
+      userData.password = await bcrypt.hash(password, salt);
+    }
 
-    // if (!userData.name || !userData.lastName || !userData.phone || !userData.email || !userData.password || !userData.rol) {
-    //   return res.status(400).json({
-    //     error: true,
-    //     message: "Faltan campos obligatorios para la actualización.",
-    //   });
-    // }
+     if (!userData.name || !userData.lastName || !userData.phone || !userData.email || !userData.password || !userData.rol) {
+       return res.status(400).json({
+         error: true,
+         message: "Faltan campos obligatorios para la actualización.",
+       });
+     }
 
     await db.User.update(userData, {
       where: { id },
-      attributes: ['id','name', 'lastName', 'email', 'password', 'rol']
     });
 
     res.json({
@@ -220,7 +208,6 @@ const deleteUsers = async (req, res) => {
       where: {
         id: id,
       },
-      attributes: ['id','name', 'lastName', 'email', 'password', 'rol']
     });
 
     if (!user) {
@@ -235,7 +222,6 @@ const deleteUsers = async (req, res) => {
       where: {
         id: id,
       },
-      attributes: ['id','name', 'lastName', 'email', 'password', 'rol']
     });
 
     res.json({
